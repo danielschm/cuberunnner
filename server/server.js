@@ -15,4 +15,9 @@ const io = require("socket.io")(app);
 
 io.on("connection", function (socket) {
     console.log("User connected: " + socket.handshake.address);
+
+    io.emit("move", {
+        cells: [],
+        player: {}
+    })
 });

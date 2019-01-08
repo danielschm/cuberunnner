@@ -1,18 +1,13 @@
 "use strict";
 
-function fnResizeHandler(CANVAS) {
-	CANVAS.width = this.innerWidth;
-	CANVAS.height = (this.innerWidth / (16 / 9));
-
-	console.log(this.innerHeight, this.innerWidth)
-}
-
 document.addEventListener("DOMContentLoaded", () => {
 	const
 		CANVAS = new Canvas(),
 		SOCKET = io();
 
-	window.addEventListener("resize", fnResizeHandler.bind(window, CANVAS));
+	SOCKET.on("move", ({ cells: aCells }) => {
+		console.log(aCells);
+	});
 
 	function todo(data) {
 		// data = { cells: [[],[]], player: {} }
@@ -20,4 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		let x = data.cells.length;
 		let y = data.cells[0].length;
 	}
+
+	SOCKET.connect();
 }, false);
