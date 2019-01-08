@@ -5,7 +5,7 @@ const ip = require("my-local-ip")();
 
 const PORT = 8080;
 
-// Start server
+// ------ start server ---------------------------
 const
     app = express()
         .use(express.static("webcontent"))
