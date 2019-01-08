@@ -1,9 +1,12 @@
 // ------ packages -------------------------------
 const express = require("express");
 const path = require("path");
+const ip = require("my-local-ip")();
 
-const INDEX = path.join(__dirname, "/webcontent/index.html");
-const NOTFOUND = path.join(__dirname, "/webcontent/notFound.html");
+const PORT = 8080;
+
+const INDEX = path.join(__dirname, "../webcontent/index.html");
+const NOTFOUND = path.join(__dirname, "../webcontent/notFound.html");
 
 function fnRouting(req, res) {
     if (req.url === "/") {

@@ -1,0 +1,25 @@
+{
+  "name": "cuberunnner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielschm/cuberunnner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielschm/cuberunnner/issues"
+  },
+  "homepage": "https://github.com/danielschm/cuberunnner#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "path": "^0.12.7",
+    "my-local-ip": "^1.0.0",
+    "socket.io": "^2.2.0"
+  }
+}
