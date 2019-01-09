@@ -31,5 +31,3 @@ io.on("connection", function (socket) {
 // ------ game -----------------------------------
 const oGame = new Game(io);
 if (bInstantStart) oGame.start();
-
-
