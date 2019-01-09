@@ -69,7 +69,7 @@ module.exports = class Game {
             this.findFreeCellCounter = this.findFreeCellCounter ? this.findFreeCellCounter + 1 : 1;
             return this.findFreeCell();
         } else {
-            throw Exception("No free cell available");
+            throw "No free cell available";
         }
     }
 
@@ -97,7 +97,6 @@ module.exports = class Game {
     }
 
     loop() {
-        console.log("Looped");
         this.players.forEach(player => {
             player.move();
         });

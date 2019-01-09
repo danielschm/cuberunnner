@@ -1,3 +1,9 @@
+const
+    UP = "up",
+    LEFT = "left",
+    RIGHT = "right",
+    DOWN = "down";
+
 module.exports = class Player {
     constructor(o) {
         this.id = o.id;
@@ -41,26 +47,27 @@ module.exports = class Player {
     }
 
     changeDirection(sDirection) {
+        console.log(`Player ${this.id} changed direction to ${sDirection}`);
         switch (sDirection) {
-            case "up":
+            case UP:
                 if (this.velY !== 1) {
                     this.velX = 0;
                     this.velY = -1;
                 }
                 break;
-            case "left":
+            case LEFT:
                 if (this.velX !== 1) {
                     this.velX = -1;
                     this.velY = 0;
                 }
                 break;
-            case "right":
+            case RIGHT:
                 if (this.velX !== -1) {
                     this.velX = 1;
                     this.velY = 0;
                 }
                 break;
-            case "down":
+            case DOWN:
                 if (this.velY !== -1) {
                     this.velX = 0;
                     this.velY = 1;
@@ -70,4 +77,4 @@ module.exports = class Player {
                 break;
         }
     }
-}
+};

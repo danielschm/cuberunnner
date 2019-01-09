@@ -22,6 +22,10 @@ io.on("connection", function (socket) {
     console.log("User connected: " + ip);
 
     oGame.connectPlayer(ip);
+
+    socket.on("changeDirection", sDirection => {
+        oGame.players.find(e => e.id === ip).changeDirection(sDirection);
+    })
 });
 
 // ------ game -----------------------------------
