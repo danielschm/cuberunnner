@@ -2,22 +2,30 @@
 const express = require("express");
 const path = require("path");
 const ip = require("my-local-ip")();
+const Game = require("./engine/Game");
+
+const bInstantStart = true;
 
 const PORT = 8080;
 
-// ------ start server ---------------------------
+// ------ server ---------------------------------
 const
     app = express()
         .use(express.static("webcontent"))
         .listen(PORT, () => console.log("Listening on " + ip + ":" + PORT + "\n." + "\n." + "\n.\n"));
 
+// ------ socket io ------------------------------
 const io = require("socket.io")(app);
 
 io.on("connection", function (socket) {
-    console.log("User connected: " + socket.handshake.address);
+    const ip = socket.handshake.address;
+    console.log("User connected: " + ip);
 
-    io.emit("move", {
-        cells: [],
-        player: {}
-    })
+    oGame.connectPlayer(ip);
 });
+
+// ------ game -----------------------------------
+const oGame = new Game(io);
+if (bInstantStart) oGame.start();
+
+

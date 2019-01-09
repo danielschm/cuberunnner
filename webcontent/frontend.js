@@ -11,6 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		CANVAS.setPlayer(oPlayer);
 	});
 
+	SOCKET.on("loop", (oData) => {
+		console.log(oData);
+	});
+
 	function todo(data) {
 		// data = { cells: [[],[]], player: {} }
 
