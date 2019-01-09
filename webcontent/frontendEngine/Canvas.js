@@ -74,7 +74,7 @@ class Canvas {
 			oCell.forEach(cell => {
 				const x = cell.x * CELL.WIDTH;
 				const y = cell.y * CELL.WIDTH;
-				this._CTX.strokeRect(y, x, CELL.WIDTH, CELL.WIDTH);
+				this._CTX.strokeRect(x, y, CELL.WIDTH, CELL.WIDTH);
 			})
 		});
 
