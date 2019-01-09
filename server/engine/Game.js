@@ -75,7 +75,13 @@ module.exports = class Game {
 
     getCell(x, y) {
         if (this.cells[x]) {
-            return this.cells[x][y];
+            if (this.cells[x][y]) {
+                return this.cells[x][y];
+            } else {
+                throw "Not found";
+            }
+        } else {
+            throw "Not found";
         }
     }
 
