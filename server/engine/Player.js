@@ -35,7 +35,7 @@ module.exports = class Player {
     }
 
     move() {
-        console.log(`Player ${this.id} moved to ${this.x}/${this.y}.`)
+        // console.log(`Player ${this.id} moved to ${this.x}/${this.y}.`)
         this.x += this.velX;
         this.y += this.velY;
 
