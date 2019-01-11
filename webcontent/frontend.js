@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     SOCKET.connect();
 
+    // window.setTimeout(() => CANVAS.draw(), 3000)
+
     window.addEventListener("keydown", oEvent => {
         switch (oEvent.which) {
             case 38:

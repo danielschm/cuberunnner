@@ -75,8 +75,12 @@ class Canvas {
 				const x = cell.x * CELL.WIDTH;
 				const y = cell.y * CELL.WIDTH;
 				this._CTX.strokeRect(x, y, CELL.WIDTH, CELL.WIDTH);
-			})
+			});
 		});
+
+		if (oPlayer) {
+			this._CTX.fillRect(oPlayer.x * 10, oPlayer.y * 10, CELL.WIDTH, CELL.WIDTH);
+		}
 
 
 		// this._drawOpponents();
