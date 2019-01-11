@@ -3,8 +3,8 @@ const Player = require("./Player");
 
 module.exports = class Game {
     constructor(io) {
-        this.width = 200;
-        this.height = 200;
+        this.width = 20;
+        this.height = 20;
         this.cells = this.createCells();
         this.players = [];
         this.io = io;

@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		CANVAS.setCells(aCells);
 		CANVAS.setPlayers(aPlayer);
 		CANVAS.draw();
+		document.getElementById("x").innerText = aPlayer[0].x;
+		document.getElementById("y").innerText = aPlayer[0].y;
     });
 
     SOCKET.connect();

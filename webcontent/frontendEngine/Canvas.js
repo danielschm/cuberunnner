@@ -1,6 +1,6 @@
 function fnResizeHandler(CANVAS) {
-	CANVAS.width = this.innerWidth;
-	CANVAS.height = this.innerHeight;
+	CANVAS.width = 500 || this.innerWidth;
+	CANVAS.height = 500 || this.innerHeight;
 }
 
 const DIRECTIONS = Object.freeze({
@@ -79,7 +79,7 @@ class Canvas {
 		});
 
 		if (oPlayer) {
-			this._CTX.fillRect(oPlayer.x * 10, oPlayer.y * 10, CELL.WIDTH, CELL.WIDTH);
+			this._CTX.fillRect(oPlayer.x * CELL.WIDTH, oPlayer.y * CELL.WIDTH, CELL.WIDTH, CELL.WIDTH);
 		}
 
 
