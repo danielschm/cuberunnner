@@ -19,12 +19,26 @@ const io = require("socket.io")(app);
 
 io.on("connection", function (socket) {
     const ip = socket.handshake.address;
-    console.log("User connected: " + ip);
 
     oGame.connectPlayer(ip);
 
     socket.on("changeDirection", sDirection => {
-        oGame.players.find(e => e.id === ip).changeDirection(sDirection);
+        oGame.players.find(e => e.id === ip).addDirectionChange(sDirection);
+    });
+
+    socket.on("disconnect", () => {
+       oGame.disconnectPlayer(ip);
+    });
+
+    socket.on("respawn", () => {
+        try {
+            const oPlayer = oGame.getPlayer(ip);
+            if (oPlayer.dead) {
+                oPlayer.spawn();
+            }
+        } catch (e) {
+            console.error(e);
+        }
     })
 });
 

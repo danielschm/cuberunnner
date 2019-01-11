@@ -67,7 +67,8 @@ class Canvas {
 
 		this._drawBackground();
 
-		this._CTX.fillStyle = "#000";
+
+
 		this._CTX.strokeStyle = "#000";
 
 		this._cells.forEach(oCell => {
@@ -75,8 +76,17 @@ class Canvas {
 				const x = cell.x * CELL.WIDTH;
 				const y = cell.y * CELL.WIDTH;
 				this._CTX.strokeRect(x, y, CELL.WIDTH, CELL.WIDTH);
+				if (cell.state === 1) {
+                    this._CTX.fillStyle = "#ff958e";
+                    this._CTX.fillRect(x, y, CELL.WIDTH, CELL.WIDTH);
+                } else if (cell.state === 2) {
+                    this._CTX.fillStyle = "#ff0001";
+                    this._CTX.fillRect(x, y, CELL.WIDTH, CELL.WIDTH);
+                }
 			});
 		});
+
+        this._CTX.fillStyle = "#000";
 
 		if (oPlayer) {
 			this._CTX.fillRect(oPlayer.x * CELL.WIDTH, oPlayer.y * CELL.WIDTH, CELL.WIDTH, CELL.WIDTH);

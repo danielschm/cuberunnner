@@ -12,8 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		CANVAS.setCells(aCells);
 		CANVAS.setPlayers(aPlayer);
 		CANVAS.draw();
-		document.getElementById("x").innerText = aPlayer[0].x;
-		document.getElementById("y").innerText = aPlayer[0].y;
     });
 
     SOCKET.connect();
@@ -33,6 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
             case 40:
                 SOCKET.emit("changeDirection", "down");
+                break;
+            case 32:
+                SOCKET.emit("respawn");
                 break;
             default:
                 break;

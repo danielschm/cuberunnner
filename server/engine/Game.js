@@ -12,26 +12,36 @@ module.exports = class Game {
 
     createCells() {
         const aGrid = [];
-        for (let i = 0; i < this.height; i++) {
-            const aRow = [];
-            for (let j = 0; j < this.width; j++) {
-                aRow.push(new Cell({
-                    x: j,
-                    y: i
+        for (let i = 0; i < this.width; i++) {
+            const aColumn = [];
+            for (let j = 0; j < this.height; j++) {
+                aColumn.push(new Cell({
+                    x: i,
+                    y: j
                 }));
             }
-            aGrid.push(aRow);
+            aGrid.push(aColumn);
         }
         return aGrid;
     }
 
+    getPlayer(id) {
+        const oPlayer = this.players.find(e => e.id === id);
+        if (!oPlayer) throw "Player not found";
+        else return oPlayer;
+    }
+
     connectPlayer(id) {
+        let oPlayer;
         try {
-            const oPlayer = this.players.find(e => e.id === id) || this.createPlayer(id);
-            const oCell = this.findFreeCell();
-            oPlayer.x = oCell.x;
-            oPlayer.y = oCell.y;
-            oPlayer.connected = true;
+            oPlayer = this.getPlayer(id);
+        } catch (e) {
+            oPlayer = this.createPlayer(id);
+        }
+        oPlayer.connected = true;
+        console.log("User connected: " + id);
+        try {
+            oPlayer.spawn();
         } catch (e) {
             console.error(e);
         }
@@ -39,11 +49,13 @@ module.exports = class Game {
 
     disconnectPlayer(id) {
         const oPlayer = this.players.find(e => e.id === id);
+        oPlayer.clearAllCells();
         Object.assign(oPlayer, {
             x: undefined,
             y: undefined,
             connected: false
         });
+        console.log("User disconnected: " + id);
     }
 
     createPlayer(id) {
@@ -62,7 +74,18 @@ module.exports = class Game {
         const x = Math.round(Math.random() * this.width);
         const y = Math.round(Math.random() * this.height);
         const oCell = this.cells[x] ? this.cells[x][y] : undefined;
-        if (oCell && oCell.state === 0) {
+        const that = this;
+
+
+        function checkCell(oCell) {
+            if (that.getCell(oCell.x+2, oCell.y) === undefined) return false;
+            if (that.getCell(oCell.x, oCell.y+2) === undefined) return false;
+            if (that.getCell(oCell.x-2, oCell.y) === undefined) return false;
+            if (that.getCell(oCell.x, oCell.y-2) === undefined) return false;
+            return true;
+        }
+
+        if (oCell && oCell.state === 0 && checkCell(oCell)) {
             this.findFreeCellCounter = 0;
             return oCell;
         } else if (this.findFreeCellCounter < 10) {
@@ -77,11 +100,7 @@ module.exports = class Game {
         if (this.cells[x]) {
             if (this.cells[x][y]) {
                 return this.cells[x][y];
-            } else {
-                throw "Not found";
             }
-        } else {
-            throw "Not found";
         }
     }
 
@@ -104,7 +123,9 @@ module.exports = class Game {
 
     loop() {
         this.players.forEach(player => {
-            player.move();
+            if (!player.dead) {
+                player.move();
+            }
         });
         this.io.emit("loop", {
             players: this.players.map(e => {
